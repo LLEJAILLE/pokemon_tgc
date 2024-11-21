@@ -41,3 +41,112 @@
     font-weight: bold;
     text-transform: capitalize;
 }
+
+@media (max-width: 1920px) {
+    .pokemon-list {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1300px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .pokemon-item img {
+        width: 300px;
+        height: 420px;
+    }
+}
+
+@media (max-width: 1320px) {
+    .pokemon-list {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1300px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .pokemon-item img {
+        width: 350px;
+        height: 470px;
+    }
+}
+
+@media (max-width: 1090px) {
+    .pokemon-list {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1300px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .pokemon-item img {
+        width: 300px;
+        height: 420px;
+    }
+}
+
+@media (max-width: 930px) {
+    .pokemon-list {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1300px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .pokemon-item img {
+        width: 250px;
+        height: 380px;
+    }
+}
+
+@media (max-width: 800px) {
+    .pokemon-list {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1300px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .pokemon-item img {
+        width: 200px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pokemon-list {
+        margin: 0 auto;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
+        padding-top: 150px;
+        font-family: 'Poppins', sans-serif;
+        background-color: rgb(230,239,247);
+    }
+    
+    .pokemon-item {
+        border-radius: 10px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+    }
+    
+    .pokemon-item.grayed-out {
+        filter: grayscale(100%);
+        opacity: 0.6;
+    }
+    
+    .pokemon-item.grayed-out img {
+        filter: grayscale(100%);
+    }
+    
+    .pokemon-item img {
+        width: 120px;
+        height: 160px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+    
+    .pokemon-item h2 {
+        font-size: 1.2em;
+        color: #333;
+        margin: 0;
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+}
