@@ -4,44 +4,47 @@ import './accueil.css';
 
 import PokemonData from '../../data/data.json';
 
+import Navbar from "../component/navbar/navbar";
+
 const Accueil = () => {
     const [pokemonList, setPokemonList] = useState([]);
+    const [nbByBooster, setNbByBooster] = useState({
+        "nbMewtwo": 0,
+        "nbPickachu": 0,
+        "nbCharizard": 0,
+    });
 
-    // Fonction pour charger les données
+    const [myNumberPokemonByBooster, setMyNumberPokemonByBooster] = useState({
+        "nbMewtwo": 0,
+        "nbPickachu": 0,
+        "nbCharizard": 0,
+    });
+
     const loadData = () => {
         const savedData = localStorage.getItem("pokemonList");
-
-        console.log("savedData", savedData);
-
-        // Vérification si des données existent et sont valides
         if (savedData && savedData !== "[]") {
-            console.log("on load depuis le localStorage");
-            setPokemonList(JSON.parse(savedData)); // Charger depuis le localStorage
+            setPokemonList(JSON.parse(savedData));
         } else {
-            console.log("on load depuis le fichier");
-            setPokemonList(PokemonData); // Charger les données par défaut
+            setPokemonList(PokemonData);
         }
     };
 
-    // Fonction pour sauvegarder les données
     const saveData = (data) => {
-        console.log("on sauvegarde dans le localStorage");
-        localStorage.setItem("pokemonList", JSON.stringify(data)); // Sauvegarder dans le localStorage
+        localStorage.setItem("pokemonList", JSON.stringify(data));
     };
 
-    // Charger les données au premier rendu
     useEffect(() => {
         loadData();
     }, []);
 
-    // Sauvegarder dans le localStorage chaque fois que pokemonList change
     useEffect(() => {
         if (pokemonList.length > 0) {
             saveData(pokemonList);
+            countMaxPokemonForEachBooster(pokemonList);
+            countCheckForEachBooster(pokemonList);
         }
     }, [pokemonList]);
 
-    // Fonction pour changer l'état 'check' d'une carte
     const checkCard = (index) => {
         let newPokemonList = pokemonList.map((pokemon, i) => {
             if (i === index) {
@@ -50,11 +53,60 @@ const Accueil = () => {
             return pokemon;
         });
 
-        setPokemonList(newPokemonList); // Mettre à jour pokemonList
+        setPokemonList(newPokemonList);
     };
 
+    const countMaxPokemonForEachBooster = (pokemonList) => {
+        let nbMewtwo = 0;
+        let nbPickachu = 0;
+        let nbCharizard = 0;
+    
+        pokemonList.forEach((pokemon) => {    
+            if (pokemon.booster.includes("Mewtwo")) {
+                nbMewtwo++;
+            }
+            if (pokemon.booster.includes("Pikachu")) {
+                nbPickachu++;
+            }
+            if (pokemon.booster.includes("Charizard")) {
+                nbCharizard++;
+            }
+        });
+        
+        setNbByBooster({
+            "nbMewtwo": nbMewtwo,
+            "nbPickachu": nbPickachu,
+            "nbCharizard": nbCharizard,
+        });
+    };
+
+    const countCheckForEachBooster = (pokemonList) => {
+        let nbMewtwo = 0;
+        let nbPickachu = 0;
+        let nbCharizard = 0;
+
+        pokemonList.forEach((pokemon) => {
+            if (pokemon.check && pokemon.booster.includes("Mewtwo")) {
+                nbMewtwo++;
+            }
+            if (pokemon.check && pokemon.booster.includes("Pikachu")) {
+                nbPickachu++;
+            }
+            if (pokemon.check && pokemon.booster.includes("Charizard")) {
+                nbCharizard++;
+            }
+        });
+
+        setMyNumberPokemonByBooster({
+            "nbMewtwo": nbMewtwo,
+            "nbPickachu": nbPickachu,
+            "nbCharizard": nbCharizard,
+        });
+    };
+    
     return (
         <div>
+            <Navbar nbByBooster={nbByBooster} myNumberPokemonByBooster={myNumberPokemonByBooster} />
             <div className="pokemon-list">
                 {pokemonList.map((pokemon, index) => {
                     return (

@@ -5,11 +5,13 @@ import Accueil from './pages/accueil/accueil';
 
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Accueil />} />
-            </Routes>
-        </Router>
+        <div>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Accueil />} />
+                </Routes>
+            </Router>
+        </div>
     );
 }
 
