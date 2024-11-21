@@ -1,0 +1,38 @@
+.pokemon-list {
+    margin: 0 auto;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+}
+
+.pokemon-item {
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.pokemon-item.grayed-out {
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.pokemon-item.grayed-out img {
+    filter: grayscale(100%);
+}
+
+.pokemon-item img {
+    width: 120px;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.pokemon-item h2 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 0;
+    font-weight: bold;
+    text-transform: capitalize;
+}
